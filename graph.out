@@ -1,0 +1,48 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] aws_eip.nat (expand)" [label = "aws_eip.nat", shape = "box"]
+		"[root] aws_internet_gateway.igw (expand)" [label = "aws_internet_gateway.igw", shape = "box"]
+		"[root] aws_nat_gateway.nat (expand)" [label = "aws_nat_gateway.nat", shape = "box"]
+		"[root] aws_route_table.private (expand)" [label = "aws_route_table.private", shape = "box"]
+		"[root] aws_route_table.public (expand)" [label = "aws_route_table.public", shape = "box"]
+		"[root] aws_route_table_association.private_us_east_1a (expand)" [label = "aws_route_table_association.private_us_east_1a", shape = "box"]
+		"[root] aws_route_table_association.private_us_east_1b (expand)" [label = "aws_route_table_association.private_us_east_1b", shape = "box"]
+		"[root] aws_route_table_association.public_us_east_1a (expand)" [label = "aws_route_table_association.public_us_east_1a", shape = "box"]
+		"[root] aws_route_table_association.public_us_east_1b (expand)" [label = "aws_route_table_association.public_us_east_1b", shape = "box"]
+		"[root] aws_subnet.private_us_east_1a (expand)" [label = "aws_subnet.private_us_east_1a", shape = "box"]
+		"[root] aws_subnet.private_us_east_1b (expand)" [label = "aws_subnet.private_us_east_1b", shape = "box"]
+		"[root] aws_subnet.public_us_east_1a (expand)" [label = "aws_subnet.public_us_east_1a", shape = "box"]
+		"[root] aws_subnet.public_us_east_1b (expand)" [label = "aws_subnet.public_us_east_1b", shape = "box"]
+		"[root] aws_vpc.main (expand)" [label = "aws_vpc.main", shape = "box"]
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
+		"[root] aws_eip.nat (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_internet_gateway.igw (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_nat_gateway.nat (expand)" -> "[root] aws_eip.nat (expand)"
+		"[root] aws_nat_gateway.nat (expand)" -> "[root] aws_internet_gateway.igw (expand)"
+		"[root] aws_nat_gateway.nat (expand)" -> "[root] aws_subnet.public_us_east_1a (expand)"
+		"[root] aws_route_table.private (expand)" -> "[root] aws_nat_gateway.nat (expand)"
+		"[root] aws_route_table.public (expand)" -> "[root] aws_internet_gateway.igw (expand)"
+		"[root] aws_route_table_association.private_us_east_1a (expand)" -> "[root] aws_route_table.private (expand)"
+		"[root] aws_route_table_association.private_us_east_1a (expand)" -> "[root] aws_subnet.private_us_east_1a (expand)"
+		"[root] aws_route_table_association.private_us_east_1b (expand)" -> "[root] aws_route_table.private (expand)"
+		"[root] aws_route_table_association.private_us_east_1b (expand)" -> "[root] aws_subnet.private_us_east_1a (expand)"
+		"[root] aws_route_table_association.public_us_east_1a (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route_table_association.public_us_east_1a (expand)" -> "[root] aws_subnet.public_us_east_1a (expand)"
+		"[root] aws_route_table_association.public_us_east_1b (expand)" -> "[root] aws_route_table.public (expand)"
+		"[root] aws_route_table_association.public_us_east_1b (expand)" -> "[root] aws_subnet.public_us_east_1b (expand)"
+		"[root] aws_subnet.private_us_east_1a (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_subnet.private_us_east_1b (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_subnet.public_us_east_1a (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_subnet.public_us_east_1b (expand)" -> "[root] aws_vpc.main (expand)"
+		"[root] aws_vpc.main (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.private_us_east_1a (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.private_us_east_1b (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.public_us_east_1a (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.public_us_east_1b (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_subnet.private_us_east_1b (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
+	}
+}
+
